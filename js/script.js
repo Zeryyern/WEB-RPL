@@ -41,16 +41,23 @@ function calculateBMI() {
     document.getElementById('bmiResult').style.display = 'block';
   }
 
+function toggleDetails(button) {
+  const details = button.nextElementSibling;
+
   function toggleDetails(button) {
   const details = button.nextElementSibling;
-  if (details.style.display === "none") {
-    details.style.display = "block";
-    button.innerText = "Hide Details";
-  } else {
-    details.style.display = "none";
+
+  if (details.classList.contains("show")) {
+    details.classList.remove("show");
     button.innerText = "View Details";
+  } else {
+    details.classList.add("show");
+    button.innerText = "Hide Details";
   }
 }
+}
+
+
 
   //video carousel
    const videoCarousel = document.querySelector('#videoCarousel');

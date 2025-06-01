@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
-require_once 'config.php'; // Make sure this file connects to your DB
+require_once 'config.php'; // Connecting file to my database (Config.php)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username_or_email = trim($_POST["username"]);
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result && $result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // Check if password matches
+        // Check if password matches before allowing user access to dashboard.php
         if (password_verify($password, $user["password"])) {
             // Correct credentials
             $_SESSION["user_id"] = $user["id"];
