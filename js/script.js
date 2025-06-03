@@ -56,9 +56,6 @@ function toggleDetails(button) {
   }
 }
 }
-
-
-
   //video carousel
    const videoCarousel = document.querySelector('#videoCarousel');
 
@@ -76,33 +73,3 @@ function toggleDetails(button) {
       activeVideo.play();
     }
   });
-
-//   //cart 
-//   function addToCart(name, price, image) {
-//   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-//   const existing = cart.find(item => item.name === name);
-//   if (existing) {
-//     existing.quantity += 1;
-//   } else {
-//     cart.push({ name, price, image, quantity: 1 });
-//   }
-
-//   localStorage.setItem("cart", JSON.stringify(cart));
-//   alert(`${name} added to cart`);
-// }
-// function loadCart() {
-//     const button = document.getElementById("checkCartBtn");
-//     const btnIcon = document.getElementById("btnIcon");
-//     const btnText = document.getElementById("btnText");
-
-//     // Disable button and show spinner
-//     button.disabled = true;
-//     btnIcon.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>';
-//     btnText.textContent = " Loading...";
-
-//     // Redirect after short delay
-//     setTimeout(() => {
-//       window.location.href = 'cart.html';
-//     }, 1500); // 1.5 seconds delay
-//   }
