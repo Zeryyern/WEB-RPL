@@ -137,9 +137,26 @@ $username = htmlspecialchars($_SESSION['username']);
                     <li class="nav-item"><a class="nav-link active" href="#">
                             <i class="bi bi-speedometer2 me-1"></i>Dashboard
                         </a></li>
-                    <li class="nav-item"><a class="nav-link" href="homepage.html">
-                            <i class="bi bi-house-door-fill me-1"></i>Home
-                        </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link position-relative" href="#" id="notifDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell-fill fs-5"></i>Notification
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                id="notif-count">
+                                0
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="notifDropdown"
+                            style="min-width: 300px;">
+                            <li class="dropdown-header">Notifications</li>
+                            <li>
+                                <div id="notif-items" class="px-3 small text-muted">
+                                    No new notifications.
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="logout.php">
                             <i class="bi bi-box-arrow-right me-1"></i> Logout
                         </a></li>
@@ -383,6 +400,60 @@ $username = htmlspecialchars($_SESSION['username']);
             </div>
         </div>
     </div>
+
+    <!-- VIDEO CAROUSEL -->
+    <!-- VIDEO CAROUSEL -->
+    <section class="container my-5">
+        <h2 class="text-center fw-bold text-primary mb-4">🌿 Healthy Culinary Inspiration</h2>
+
+        <div id="videoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="8000">
+            <div class="carousel-inner rounded-4 shadow-lg overflow-hidden">
+
+                <!-- First Video -->
+                <div class="carousel-item active position-relative">
+                    <video class="d-block w-100 rounded" autoplay muted loop playsinline>
+                        <source src="assets/videos/culinary.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                        <h5 class="text-white fw-bold">Delicious & Nutritious Meals</h5>
+                        <p class="mb-0 text-light">Learn how to cook healthy dishes at home</p>
+                    </div>
+                </div>
+
+                <!-- Second Video -->
+                <div class="carousel-item position-relative">
+                    <video class="d-block w-100 rounded" muted loop playsinline>
+                        <source src="assets/videos/exercise1.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                        <h5 class="text-white fw-bold">Stay Fit with Easy Exercises</h5>
+                        <p class="mb-0 text-light">Combine food with simple workouts for better results</p>
+                    </div>
+                </div>
+
+                <!-- Third Video -->
+                <div class="carousel-item position-relative">
+                    <video class="d-block w-100 rounded" muted loop playsinline>
+                        <source src="assets/videos/bmivid.mp4" type="video/mp4">
+                    </video>
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                        <h5 class="text-white fw-bold">Understand Your BMI</h5>
+                        <p class="mb-0 text-light">A guide to tracking your health through BMI</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark bg-opacity-50 rounded-circle p-2"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark bg-opacity-50 rounded-circle p-2"></span>
+            </button>
+        </div>
+    </section>
+
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center p-4 mt-5">

@@ -1,9 +1,13 @@
 <?php
 include 'config.php';
 
-$query = "SELECT f.id, u.username, f.feedback, f.response, f.submitted_at
+$query = "SELECT f.id,
+                 COALESCE(f.name, u.username) AS display_name,
+                 f.feedback,
+                 f.response,
+                 f.submitted_at
           FROM feedbacks f
-          JOIN users u ON f.user_id = u.id
+          LEFT JOIN users u ON f.user_id = u.id
           ORDER BY f.submitted_at DESC";
 
 $result = $conn->query($query);
@@ -57,11 +61,21 @@ $result = $conn->query($query);
                         <tbody>
                             <?php while ($row = $result->fetch_assoc()) : ?>
                             <tr>
-                                <td class="text-nowrap"><?= htmlspecialchars($row['username']) ?></td>
+                                <td class="text-nowrap"><?= htmlspecialchars($row['display_name']) ?></td>
                                 <td><?= nl2br(htmlspecialchars($row['feedback'])) ?></td>
                                 <td><?= date('M d, Y H:i', strtotime($row['submitted_at'])) ?></td>
                                 <td>
-                                    <?= $row['response'] ? nl2br(htmlspecialchars($row['response'])) : '<span class="text-muted fst-italic">No reply yet</span>' ?>
+                                    <?php
+
+                                        if ($row['response'] === 'Deleted') {
+                                        echo '<span class="text-danger fst-italic">Deleted</span>';
+                                        } elseif ($row['response']) {
+                                        echo nl2br(htmlspecialchars($row['response']));
+                                        } else {
+                                        echo '<span class="text-muted fst-italic">No reply yet</span>';
+                                        }
+                                    ?>
+
                                 </td>
                                 <td>
                                     <?php if (!$row['response']) : ?>
@@ -69,21 +83,29 @@ $result = $conn->query($query);
                                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                         <textarea name="response" class="form-control form-control-sm mb-2" rows="2"
                                             required></textarea>
-                                        <button type="submit" class="btn btn-success btn-sm">Send Reply</button>
-                                        <button type="submit" class="btn btn-success btn-sm">delete Reply</button>
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" class="btn btn-success btn-sm">Send Reply</button>
                                     </form>
-                                    <?php else : ?>
-                                    <span class="badge bg-success">Replied</span>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
+
+                                    <form method="POST" action="delete_feedback.php"
+                                        onsubmit="return confirm('Are you sure you want to delete this feedback?');">
+                                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </form>
                 </div>
+                </form>
+                <?php else : ?>
+                <span class="badge bg-success">Replied</span>
                 <?php endif; ?>
+                </td>
+                </tr>
+                <?php endwhile; ?>
+                </tbody>
+                </table>
             </div>
+            <?php endif; ?>
         </div>
+    </div>
     </div>
 
 </body>
