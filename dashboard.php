@@ -288,18 +288,88 @@ $username = htmlspecialchars($_SESSION['username']);
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                    <!--BMI session-->
                     <div id="bmi" class="content-section">
-                        <h4>BMI Calculator</h4>
-                        <p>Calculate your Body Mass Index and track your health progress.</p>
+                        <section class="container py-5" id="bmi">
+                            <h2 class="mb-4 text-center">BMI Calculator & Personalized Food Recommendations</h2>
+                            <form onsubmit="event.preventDefault(); calculateBMI();">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="height" class="form-label">Height (cm)</label>
+                                        <input type="number" class="form-control" id="height" placeholder="e.g. 170"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="weight" class="form-label">Weight (kg)</label>
+                                        <input type="number" class="form-control" id="weight" placeholder="e.g. 70"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class=" text-center">
+                                    <button type="submit" class="btn btn-success">Calculate & Get Food Plan</button>
+                                </div>
+                            </form>
+                        </section>
                     </div>
 
+                    <!-- Feedback Sesssion-->
                     <div id="feedback" class="content-section">
-                        <h4>Give Feedback</h4>
-                        <p>We value your feedback to improve YourDietBuddy.</p>
+                        <section class="container my-5" id="feedback">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-7 col-md-9">
+                                    <div class="card shadow-lg border-0">
+                                        <div class="card-header bg-success text-white text-center py-4">
+                                            <h2 class="mb-0"><i class="bi bi-chat-dots me-2"></i>We Value Your Feedback
+                                            </h2>
+                                            <p class="mb-0 small">Let us know how we can improve your experience</p>
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <!-- Success/Error message placeholder -->
+                                            <div id="feedbackMessage" style="display:none;" class="alert" role="alert">
+                                            </div>
+                                            <form id="feedbackForm" action="php/send_feedback.php" method="POST"
+                                                autocomplete="off">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="username"
+                                                        name="username" placeholder="Your Name" required>
+                                                    <label for="username"><i class="bi bi-person-fill me-1"></i>Your
+                                                        Name</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        placeholder="you@example.com" required>
+                                                    <label for="email"><i class="bi bi-envelope-fill me-1"></i>Email
+                                                        Address</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="subject" name="subject"
+                                                        placeholder="Subject" required>
+                                                    <label for="subject"><i
+                                                            class="bi bi-tag-fill me-1"></i>Subject</label>
+                                                </div>
+                                                <div class="form-floating mb-4">
+                                                    <textarea class="form-control" id="feedback" name="feedback"
+                                                        placeholder="Write your message here..." style="height: 120px;"
+                                                        required></textarea>
+                                                    <label for="feedback"><i class="bi bi-pencil-fill me-1"></i>Your
+                                                        Feedback</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm">
+                                                    <i class="bi bi-send-fill me-2"></i>Submit Feedback
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <link rel="stylesheet"
+                            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
                     </div>
 
+                    <!--Track history Session-->
                     <div id="history" class="content-section">
                         <h4>Track History</h4>
                         <p>Review your past diet and health records here.</p>
@@ -323,7 +393,6 @@ $username = htmlspecialchars($_SESSION['username']);
         <a href="#" class="text-white me-3 fs-4"><i class="bi bi-github"></i></a>
         <p class="mt-3 mb-0">© 2025 YourDietBuddy. All rights reserved.</p>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     const buttons = document.querySelectorAll('.btn[data-target]');
@@ -371,6 +440,37 @@ $username = htmlspecialchars($_SESSION['username']);
             }
         });
     }
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = e.target;
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => r.json())
+            .then(data => {
+                var msg = document.getElementById('feedbackMessage');
+                if (data.success) {
+                    form.style.display = 'none';
+                    msg.className = 'alert alert-success';
+                    msg.style.display = 'block';
+                    msg.innerText = data.message || 'Thank you for your feedback!';
+                } else {
+                    msg.className = 'alert alert-danger';
+                    msg.style.display = 'block';
+                    msg.innerText = data.message ||
+                        'There was a problem submitting your feedback.';
+                }
+            })
+            .catch(() => {
+                var msg = document.getElementById('feedbackMessage');
+                msg.className = 'alert alert-danger';
+                msg.style.display = 'block';
+                msg.innerText = 'An error occurred. Please try again.';
+            });
+    });
     </script>
 </body>
 
