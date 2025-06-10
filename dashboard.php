@@ -7,6 +7,51 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $username = htmlspecialchars($_SESSION['username']);
+$user_id = $_SESSION['user_id'];
+
+// Database connection
+$conn = new mysqli("localhost", "root", "", "yourdietbuddy_db");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch BMI history
+$bmi_history = [];
+$sql = "SELECT * FROM bmi_history WHERE user_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $bmi_history[] = $row;
+}
+$stmt->close();
+
+// Fetch recommendations (if stored)
+$recommendations = [];
+$sql = "SELECT * FROM recommendations WHERE user_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $recommendations[] = $row;
+}
+$stmt->close();
+
+// Fetch feedback sent by user
+$feedbacks = [];
+$sql = "SELECT * FROM feedbacks WHERE user_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $feedbacks[] = $row;
+}
+$stmt->close();
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -120,6 +165,11 @@ $username = htmlspecialchars($_SESSION['username']);
         overflow: visible;
         padding-top: 1rem;
         padding-bottom: 1rem;
+    }
+
+    .scrolling-recipes:hover,
+    .scrolling-recipes:has(.recipe-card:hover) {
+        animation-play-state: paused;
     }
     </style>
 </head>
@@ -328,6 +378,12 @@ $username = htmlspecialchars($_SESSION['username']);
                                     <button type="submit" class="btn btn-success">Calculate & Get Food Plan</button>
                                 </div>
                             </form>
+                            <div id="bmiResult" style="display:none;" class="mt-4">
+                                <p id="bmiValue" class="text-center fw-bold text-info"></p>
+                                <div id="recommendations" class="container mt-4"></div>
+                            </div>
+
+
                         </section>
                     </div>
 
@@ -402,7 +458,6 @@ $username = htmlspecialchars($_SESSION['username']);
     </div>
 
     <!-- VIDEO CAROUSEL -->
-    <!-- VIDEO CAROUSEL -->
     <section class="container my-5">
         <h2 class="text-center fw-bold text-primary mb-4">🌿 Healthy Culinary Inspiration</h2>
 
@@ -465,83 +520,19 @@ $username = htmlspecialchars($_SESSION['username']);
         <p class="mt-3 mb-0">© 2025 YourDietBuddy. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
     <script>
-    const buttons = document.querySelectorAll('.btn[data-target]');
-    const sections = document.querySelectorAll('#content-area > div');
-
-    function showSection(id) {
-        sections.forEach(section => {
-            section.classList.remove('active');
-            if (section.id === id) section.classList.add('active');
-        });
-    }
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const target = button.getAttribute('data-target');
-            showSection(target);
-        });
-    });
-
-    function toggleDetails(button) {
-        const allCards = document.querySelectorAll('.recipe-card');
-
-        allCards.forEach(card => {
-            const image = card.querySelector('.recipe-image');
-            const details = card.querySelector('.food-details');
-            const btn = card.querySelector('button');
-
-            if (card === button.closest('.recipe-card')) {
-                // Toggle clicked card
-                const isShowing = details.classList.contains('show');
-                if (isShowing) {
-                    image.classList.remove('hidden');
-                    details.classList.remove('show');
-                    btn.textContent = 'View Details';
-                } else {
-                    image.classList.add('hidden');
-                    details.classList.add('show');
-                    btn.textContent = 'Hide Details';
-                }
-            } else {
-                // Close all other cards
-                image.classList.remove('hidden');
-                details.classList.remove('show');
-                btn.textContent = 'View Details';
-            }
-        });
-    }
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var form = e.target;
-        var formData = new FormData(form);
-
-        fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(r => r.json())
-            .then(data => {
-                var msg = document.getElementById('feedbackMessage');
-                if (data.success) {
-                    form.style.display = 'none';
-                    msg.className = 'alert alert-success';
-                    msg.style.display = 'block';
-                    msg.innerText = data.message || 'Thank you for your feedback!';
-                } else {
-                    msg.className = 'alert alert-danger';
-                    msg.style.display = 'block';
-                    msg.innerText = data.message ||
-                        'There was a problem submitting your feedback.';
-                }
-            })
-            .catch(() => {
-                var msg = document.getElementById('feedbackMessage');
-                msg.className = 'alert alert-danger';
-                msg.style.display = 'block';
-                msg.innerText = 'An error occurred. Please try again.';
+    const scrollingRecipes = document.querySelector('.scrolling-recipes');
+    if (scrollingRecipes) {
+        document.querySelectorAll('.recipe-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                scrollingRecipes.style.animationPlayState = 'paused';
             });
-    });
+            card.addEventListener('mouseleave', () => {
+                scrollingRecipes.style.animationPlayState = 'running';
+            });
+        });
+    }
     </script>
 </body>
 
