@@ -346,12 +346,92 @@
       });
     });
 
-    // Handle Social Media Links form submit (UI only)
-    document.getElementById('socialMediaForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Social media link will be saved when backend is implemented.');
+    // Fetch and render social links
+function fetchSocialLinks() {
+  fetch('../php/manage_social_links.php', {
+    method: 'POST',
+    body: new URLSearchParams({action: 'list'})
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      const tbody = document.getElementById('socialMediaTableBody');
+      tbody.innerHTML = '';
+      data.links.forEach((link, idx) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${idx + 1}</td>
+            <td>${link.platform}</td>
+            <td><a href="${link.url}" target="_blank">${link.url}</a></td>
+            <td class="table-actions">
+              <button class="btn btn-sm btn-primary" onclick="editSocialLink(${link.id}, '${link.platform.replace(/'/g,"\\'")}', '${link.url.replace(/'/g,"\\'")}')"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-danger" onclick="deleteSocialLink(${link.id})"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+  });
+}
+fetchSocialLinks();
+
+// Add new link
+document.getElementById('socialMediaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const platform = document.getElementById('platformName').value;
+  const url = document.getElementById('platformURL').value;
+  fetch('../php/manage_social_links.php', {
+    method: 'POST',
+    body: new URLSearchParams({action: 'add', platform, url})
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      alert('Social media link added!');
       e.target.reset();
-    });
+      fetchSocialLinks();
+    } else {
+      alert(data.message || 'Failed to add link');
+    }
+  });
+});
+
+// Edit social link
+function editSocialLink(id, platform, url) {
+  const newPlatform = prompt('Edit platform:', platform);
+  if (!newPlatform) return;
+  const newUrl = prompt('Edit URL:', url);
+  if (!newUrl) return;
+  fetch('../php/manage_social_links.php', {
+    method: 'POST',
+    body: new URLSearchParams({action: 'edit', id, platform: newPlatform, url: newUrl})
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      fetchSocialLinks();
+    } else {
+      alert(data.message || 'Failed to edit link');
+    }
+  });
+}
+
+// Delete social link
+function deleteSocialLink(id) {
+  if (!confirm('Delete this link?')) return;
+  fetch('../php/manage_social_links.php', {
+    method: 'POST',
+    body: new URLSearchParams({action: 'delete', id})
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      fetchSocialLinks();
+    } else {
+      alert(data.message || 'Failed to delete link');
+    }
+  });
+}
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

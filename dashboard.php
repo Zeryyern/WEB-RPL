@@ -51,6 +51,12 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
+// Fetch social links from DB
+$social_links = [];
+$result = $conn->query("SELECT * FROM social_links");
+while ($row = $result->fetch_assoc()) {
+    $social_links[] = $row;
+}
 $conn->close();
 ?>
 
@@ -513,10 +519,23 @@ $conn->close();
     <!-- Footer -->
     <footer class="bg-dark text-white text-center p-4 mt-5">
         <p class="mb-2">Follow us:</p>
-        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-github"></i></a>
+        <?php
+        // Map platform names to Bootstrap icon names if needed
+        $icon_map = [
+            'facebook' => 'facebook',
+            'instagram' => 'instagram',
+            'twitter' => 'twitter',
+            'github' => 'github',
+            // Add more mappings if needed
+        ];
+        foreach ($social_links as $link):
+            $platform = strtolower($link['platform']);
+            $icon = isset($icon_map[$platform]) ? $icon_map[$platform] : 'link';
+        ?>
+        <a href="<?= htmlspecialchars($link['url']) ?>" class="text-white me-3 fs-4" target="_blank">
+            <i class="bi bi-<?= $icon ?>"></i>
+        </a>
+        <?php endforeach; ?>
         <p class="mt-3 mb-0">© 2025 YourDietBuddy. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
