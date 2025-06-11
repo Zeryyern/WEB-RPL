@@ -57,6 +57,14 @@ $result = $conn->query("SELECT * FROM social_links");
 while ($row = $result->fetch_assoc()) {
     $social_links[] = $row;
 }
+
+// Fetch admin-added BMI recommendations
+$bmi_recs = [];
+$result = $conn->query("SELECT * FROM bmi_recommendations ORDER BY created_at DESC");
+while ($row = $result->fetch_assoc()) {
+    $bmi_recs[] = $row;
+}
+
 $conn->close();
 ?>
 
@@ -359,6 +367,27 @@ $conn->close();
                                         </div>
                                     </div>
                                 </div>
+
+                                <?php foreach ($bmi_recs as $rec): ?>
+                                <div class="card recipe-card shadow-sm">
+                                    <div class="recipe-image">
+                                        <img src="<?= htmlspecialchars($rec['image']) ? htmlspecialchars($rec['image']) : 'assets/images/default_food.jpg' ?>"
+                                            class="card-img-top" alt="<?= htmlspecialchars($rec['food']) ?>">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= htmlspecialchars($rec['food']) ?></h5>
+                                        <p class="card-text"><?= htmlspecialchars($rec['category']) ?></p>
+                                        <button class="btn btn-outline-success w-100 mt-2"
+                                            onclick="toggleDetails(this)">
+                                            View Details
+                                        </button>
+                                        <div class="food-details mt-3">
+                                            <p><strong>Exercise:</strong>
+                                                <?= nl2br(htmlspecialchars($rec['exercise'])) ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
