@@ -1,11 +1,16 @@
 <?php
-// filepath: c:\xampp\htdocs\yourDietBuddy\php\footer.php
 if (!isset($social_links)) $social_links = [];
 $icon_map = [
     'facebook' => 'facebook',
     'instagram' => 'instagram',
     'twitter' => 'twitter',
     'github' => 'github',
+    'linkedin'=>'linkedin', 
+    'youtube' => 'youtube', 
+    'pinterest' => 'pinterest',
+    'tiktok' => 'tiktok',
+    'snapchat' => 'snapchat',
+    'whatsapp' => 'whatsapp',
     // Add more if needed
 ];
 ?>

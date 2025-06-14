@@ -1,5 +1,4 @@
 <?php
-// filepath: c:\xampp\htdocs\yourDietBuddy\php\manage_social_links.php
 
 header('Content-Type: application/json');
 $conn = new mysqli("localhost", "root", "", "yourdietbuddy_db");
