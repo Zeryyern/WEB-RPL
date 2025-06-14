@@ -24,19 +24,19 @@
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="homepage.html">YourDietBuddy</a>
+            <a class="navbar-brand" href="homepage.php">YourDietBuddy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="homepage.html">
+                        <a class="nav-link" href="homepage.php">
                             <i class="bi bi-house-door-fill me-1"></i> Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">
+                        <a class="nav-link" href="about.php">
                             <i class="bi bi-info-circle-fill me-1"></i> About
                         </a>
                     </li>
@@ -83,7 +83,7 @@
                         <i class="bi bi-box-arrow-in-right me-1"></i> Login
                     </button>
                 </div>
-                <p class="text-center">Don't have an account? <a href="register.html">Register</a></p>
+                <p class="text-center">Don't have an account? <a href="register.php">Register</a></p>
                 <hr>
                 <div class="text-center">
                     <a href="admin.php" class="btn btn-outline-secondary btn-sm">Login as Admin</a>

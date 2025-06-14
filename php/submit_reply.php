@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: ../admin.html");
+    header("Location: ../admin.php");
     exit;
 }
 ?>

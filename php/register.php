@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php'; // assumes config.php connects to your DB
+require_once 'config.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize inputs
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check->close();
     $conn->close();
 } else {
-    header("Location: ../register.html");
+    header("Location: ../register.php");
     exit();
 }
 ?>

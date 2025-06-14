@@ -192,7 +192,7 @@ $conn->close();
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="homepage.html">YourDietBuddy</a>
+            <a class="navbar-brand" href="homepage.php">YourDietBuddy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -546,27 +546,8 @@ $conn->close();
 
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center p-4 mt-5">
-        <p class="mb-2">Follow us:</p>
-        <?php
-        // Map platform names to Bootstrap icon names if needed
-        $icon_map = [
-            'facebook' => 'facebook',
-            'instagram' => 'instagram',
-            'twitter' => 'twitter',
-            'github' => 'github',
-            // Add more mappings if needed
-        ];
-        foreach ($social_links as $link):
-            $platform = strtolower($link['platform']);
-            $icon = isset($icon_map[$platform]) ? $icon_map[$platform] : 'link';
-        ?>
-        <a href="<?= htmlspecialchars($link['url']) ?>" class="text-white me-3 fs-4" target="_blank">
-            <i class="bi bi-<?= $icon ?>"></i>
-        </a>
-        <?php endforeach; ?>
-        <p class="mt-3 mb-0">© 2025 YourDietBuddy. All rights reserved.</p>
-    </footer>
+    <?php include 'php/social_links_fetch.php'; ?>
+    <?php include 'php/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/script.js"></script>
     <script>

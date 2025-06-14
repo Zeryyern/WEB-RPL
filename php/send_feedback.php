@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = trim($_POST['email'] ?? '');
 
         if (empty($username) || empty($email)) {
-            header("Location: ../homepage.html?feedback=error&message=missing_user_info");
+            header("Location: ../homepage.php?feedback=error&message=missing_user_info");
             exit;
         }
 
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ss", $username, $email);
             if (!$stmt->execute()) {
                 $stmt->close();
-                header("Location: ../homepage.html?feedback=error&message=user_insert_failed");
+                header("Location: ../homepage.php?feedback=error&message=user_insert_failed");
                 exit;
             }
             $user_id = $stmt->insert_id;
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $feedback = trim($_POST['feedback'] ?? '');
 
     if (empty($subject) || empty($feedback)) {
-        header("Location: ../homepage.html?feedback=error&message=missing_feedback");
+        header("Location: ../homepage.php?feedback=error&message=missing_feedback");
         exit;
     }
 
@@ -54,16 +54,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("is", $user_id, $feedback);
     if ($stmt->execute()) {
         $stmt->close();
-        header("Location: ../homepage.html?feedback=success");
+        header("Location: ../homepage.php?feedback=success");
         exit;
     } else {
         $stmt->close();
-        header("Location: ../homepage.html?feedback=error&message=feedback_insert_failed");
+        header("Location: ../homepage.php?feedback=error&message=feedback_insert_failed");
         exit;
     }
 } else {
     // Invalid request method
-    header("Location: ../homepage.html");
+    header("Location: ../homepage.php");
     exit;
 }
 ?>
