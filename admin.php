@@ -4,7 +4,6 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
 
-    // For PHP 8.0+:
     if (str_ends_with($username, '@student.uns.ac.id')) {
         header('Location: admin/admin.html');
         exit();
