@@ -110,4 +110,4 @@ $result = $conn->query($query);
 
 </body>
 
-</html
+</html>

@@ -507,9 +507,6 @@ $conn->close();
                 <h2 class=" fw-bold text-primary mb-4">Community Forum</h2>
                 <p class="lead text-secondary mb-0">Discuss ideas, share feedback, and connect with others.</p>
             </div>
-            <a href="create_topic.php" class="btn btn-primary rounded-pill shadow-sm px-4">
-                <i class="bi bi-plus-circle me-2"></i> New Topic
-            </a>
         </div>
 
         <div class="card shadow-sm border-0">
@@ -524,78 +521,10 @@ $conn->close();
                             <th class="d-none d-md-table-cell" style="width: 220px;">Last Post</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Example row -->
-                        <tr>
-                            <td class="text-center">
-                                <span
-                                    class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center"
-                                    style="width:40px;height:40px;">
-                                    <i class="bi bi-chat-dots fs-4 text-primary"></i>
-                                </span>
-                            </td>
-                            <td>
-                                <h5 class="mb-1">
-                                    <a href="php/forum_topic.php?id=1"
-                                        class="text-decoration-none text-dark fw-semibold">
-                                        General Discussion
-                                    </a>
-                                </h5>
-                                <div class="text-muted small">Talk about anything related to our community.</div>
-                            </td>
-                            <td class="text-center d-none d-sm-table-cell">
-                                <span class="badge rounded-pill bg-secondary">12</span>
-                            </td>
-                            <td class="text-center d-none d-sm-table-cell">
-                                <span class="badge rounded-pill bg-secondary">45</span>
-                            </td>
-                            <td class="d-none d-md-table-cell">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img src="assets/avatar1.png" alt="Alice" class="rounded-circle border" width="32"
-                                        height="32">
-                                    <div>
-                                        <div class="fw-semibold">Alice</div>
-                                        <small class="text-muted"><i class="bi bi-clock me-1"></i>2 hours ago</small>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <span
-                                    class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center"
-                                    style="width:40px;height:40px;">
-                                    <i class="bi bi-lightbulb fs-4 text-warning"></i>
-                                </span>
-                            </td>
-                            <td>
-                                <h5 class="mb-1">
-                                    <a href="forum_topic.php?id=2" class="text-decoration-none text-dark fw-semibold">
-                                        Feature Requests
-                                    </a>
-                                </h5>
-                                <div class="text-muted small">Suggest new features or improvements.</div>
-                            </td>
-                            <td class="text-center d-none d-sm-table-cell">
-                                <span class="badge rounded-pill bg-secondary">8</span>
-                            </td>
-                            <td class="text-center d-none d-sm-table-cell">
-                                <span class="badge rounded-pill bg-secondary">20</span>
-                            </td>
-                            <td class="d-none d-md-table-cell">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img src="assets/avatar2.png" alt="Bob" class="rounded-circle border" width="32"
-                                        height="32">
-                                    <div>
-                                        <div class="fw-semibold">Bob</div>
-                                        <small class="text-muted"><i class="bi bi-clock me-1"></i>1 day ago</small>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Add more topics dynamically from your database -->
+                    <tbody id="forumTopicsBody">
+                        <!-- Topics will be loaded here dynamically -->
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -673,6 +602,9 @@ $conn->close();
         });
     }
     </script>
+    <script src="js/forum_topic.js"></script>
+    <script src="js/load_forum_topics.js"></script>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php'; // Database connection
+include 'config.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if user is logged in
