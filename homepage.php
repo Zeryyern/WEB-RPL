@@ -428,25 +428,8 @@ include 'php/social_links_fetch.php';
             </button>
         </div>
     </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-dark text-white text-center p-4 mt-5">
-        <p class="mb-2">Follow us:</p>
-        <a href="#" class="text-white me-3 fs-4" aria-label="Facebook">
-            <i class="bi bi-facebook"></i>
-        </a>
-        <a href="#" class="text-white me-3 fs-4" aria-label="Instagram">
-            <i class="bi bi-instagram"></i>
-        </a>
-        <a href="#" class="text-white me-3 fs-4" aria-label="Twitter">
-            <i class="bi bi-twitter"></i>
-        </a>
-        <a href="#" class="text-white me-3 fs-4" aria-label="Github">
-            <i class="bi bi-github"></i>
-        </a>
-        <p class="mt-3 mb-0">© 2025 YourDietBuddy. All rights reserved.</p>
-    </footer>
-
+    <?php include 'php/social_links_fetch.php'; ?>
+    <?php include 'php/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
