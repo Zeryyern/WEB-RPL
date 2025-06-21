@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: ../admin.php");
+    header("Location: " . $_SERVER['HTTP_REFERER']);
     exit;
 }
 ?>

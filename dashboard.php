@@ -211,16 +211,15 @@ $conn->close();
                     <li class="nav-item"><a class="nav-link active" href="#">
                             <i class="bi bi-speedometer2 me-1"></i>Dashboard
                         </a></li>
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link position-relative" href="#" id="notifDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-bell-fill fs-5"></i>Notification
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                id="notif-count">
-                                0
-                            </span>
+                            <i class="bi bi-bell"></i>
+                            <span class="badge bg-danger rounded-pill" id="notif-count"
+                                style="font-size: 0.6rem;">!</span>
                         </a>
+
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="notifDropdown"
                             style="min-width: 300px;">
                             <li class="dropdown-header">Notifications</li>
@@ -231,6 +230,7 @@ $conn->close();
                             </li>
                         </ul>
                     </li>
+
                     <li class="nav-item"><a class="nav-link" href="logout.php">
                             <i class="bi bi-box-arrow-right me-1"></i> Logout
                         </a></li>
@@ -604,6 +604,7 @@ $conn->close();
     </script>
     <script src="js/forum_topic.js"></script>
     <script src="js/load_forum_topics.js"></script>
+    <script src="js/notification.js"></script>
 
 </body>
 
