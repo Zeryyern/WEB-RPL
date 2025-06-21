@@ -301,12 +301,6 @@
       reader.readAsDataURL(file);
     });
 
-    // Handle Forum Management form submit (UI only)
-    document.getElementById('forumForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Forum topic will be saved when backend is implemented.');
-      e.target.reset();
-    });
 
     // Feedback reply toggle and send (UI only)
     document.querySelectorAll('.reply-btn').forEach(button => {
