@@ -41,7 +41,7 @@ $stmt->close();
 
 // Fetch feedback sent by user
 $feedbacks = [];
-$sql = "SELECT * FROM feedbacks WHERE user_id = ? ORDER BY created_at DESC";
+$sql = "SELECT * FROM feedbacks WHERE user_id = ? ORDER BY submitted_at DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -406,8 +406,8 @@ $conn->close();
                     <div id="bmi" class="content-section">
                         <section class="container py-5" id="bmi">
                             <h2 class="mb-4 text-center">BMI Calculator & Personalized Food Recommendations</h2>
-                            <form onsubmit="event.preventDefault(); calculateBMI();">
-                                <div class="row mb-3">
+                            <form id="bmiForm">
+                                <div class=" row mb-3">
                                     <div class="col-md-6">
                                         <label for="height" class="form-label">Height (cm)</label>
                                         <input type="number" class="form-control" id="height" placeholder="e.g. 170"
@@ -427,8 +427,6 @@ $conn->close();
                                 <p id="bmiValue" class="text-center fw-bold text-info"></p>
                                 <div id="recommendations" class="container mt-4"></div>
                             </div>
-
-
                         </section>
                     </div>
 
@@ -478,6 +476,11 @@ $conn->close();
                                                     <i class="bi bi-send-fill me-2"></i>Submit Feedback
                                                 </button>
                                             </form>
+
+                                            <div id="feedbackSuccess" class="alert alert-success mt-3 text-center"
+                                                style="display: none;">
+                                                ✅ Thank you! Your feedback was submitted successfully.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -489,6 +492,29 @@ $conn->close();
                     <div id="history" class="content-section">
                         <h4>Track History</h4>
                         <p>Review your past diet and health records here.</p>
+                        <section class="container my-5">
+                            <div id="historyOutput" class="table-responsive">
+                                <table class="table table-bordered table-striped mt-3">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Height (cm)</th>
+                                            <th>Weight (kg)</th>
+                                            <th>BMI</th>
+                                            <th>Status</th>
+                                            <th>Recommended Food</th>
+                                            <th>Suggested Exercise</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="historyBody">
+                                        <tr>
+                                            <td colspan="5">Loading...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
                     </div>
                 </div>
             </div>
@@ -522,7 +548,7 @@ $conn->close();
                         </tr>
                     </thead>
                     <tbody id="forumTopicsBody">
-                        <!-- Topics will be loaded here dynamically -->
+                        <!-- Topics will be loaded here dynamically by the admin-->
                     </tbody>
 
                 </table>

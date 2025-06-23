@@ -364,13 +364,13 @@ include 'php/social_links_fetch.php';
     </section>
 
     <!-- Feedback Section -->
-    <section class="container my-5" id="feedback">
+    <section class="container my-5" id="feedbackForm">
         <div class="card shadow-lg">
             <div class="card-header bg-success text-white">
                 <h2 class="mb-0 text-center">We Value Your Feedback</h2>
             </div>
             <div class="card-body">
-                <form action="php/send_feedback.php" method="POST">
+                <form id="feedbackFormElement" action="php/send_feedback.php" method="POST">
                     <div class="mb-3">
                         <label for="username" class="form-label">Your Name</label>
                         <input type="text" class="form-control" id="username" name="username"
@@ -393,8 +393,10 @@ include 'php/social_links_fetch.php';
                     </div>
                     <button type="submit" class="btn btn-success w-100">Submit Feedback</button>
                 </form>
+                <div id="feedbackSuccess" class="alert alert-success mt-3 text-center" style="display: none;">
+                    ✅ Thank you! Your feedback was submitted successfully.
+                </div>
             </div>
-        </div>
     </section>
 
     <!-- VIDEO CAROUSEL -->
@@ -432,6 +434,7 @@ include 'php/social_links_fetch.php';
     <?php include 'php/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/feedback.js"></script>
 </body>
 
 </html>

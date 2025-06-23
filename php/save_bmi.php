@@ -6,7 +6,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$bmi = $_POST['bmi'] ?? '';
+$height = floatval($_POST['height'] ?? 0);
+$weight = floatval($_POST['weight'] ?? 0);
+$bmi = floatval($_POST['bmi'] ?? 0);
 $status = $_POST['status'] ?? '';
 $food = $_POST['food'] ?? '';
 $exercise = $_POST['exercise'] ?? '';
@@ -14,21 +16,27 @@ $exercise = $_POST['exercise'] ?? '';
 $conn = new mysqli("localhost", "root", "", "yourdietbuddy_db");
 if ($conn->connect_error) {
     http_response_code(500);
-    exit('Database error');
+    exit('Database connection error');
 }
 
-// Save to bmi_history table
-$stmt = $conn->prepare("INSERT INTO bmi_history (user_id, bmi, status) VALUES (?, ?, ?)");
-$stmt->bind_param("ids", $user_id, $bmi, $status);
-$stmt->execute();
+// ✅ Save to bmi_history table (includes height and weight)
+$stmt = $conn->prepare("INSERT INTO bmi_history (user_id, height, weight, bmi, status) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("iddds", $user_id, $height, $weight, $bmi, $status);
+if (!$stmt->execute()) {
+    http_response_code(500);
+    exit('Failed to save BMI history');
+}
 $stmt->close();
 
-// Save to recommendations table
+// ✅ Save to recommendations table
 $rec_content = "Food: $food | Exercise: $exercise";
-$stmt = $conn->prepare("INSERT INTO recommendations (user_id, type, content) VALUES (?, ?, ?)");
 $type = "BMI Recommendation";
+$stmt = $conn->prepare("INSERT INTO recommendations (user_id, type, content) VALUES (?, ?, ?)");
 $stmt->bind_param("iss", $user_id, $type, $rec_content);
-$stmt->execute();
+if (!$stmt->execute()) {
+    http_response_code(500);
+    exit('Failed to save recommendation');
+}
 $stmt->close();
 
 $conn->close();
