@@ -431,62 +431,47 @@ $conn->close();
                     </div>
 
                     <!-- Feedback Sesssion-->
-                    <div id="feedback" class="content-section">
-                        <section class="container my-5" id="feedback">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7 col-md-9">
-                                    <div class="card shadow-lg border-0">
-                                        <div class="card-header bg-success text-white text-center py-4">
-                                            <h2 class="mb-0"><i class="bi bi-chat-dots me-2"></i>We Value Your Feedback
-                                            </h2>
-                                            <p class="mb-0 small">Let us know how we can improve your experience</p>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <!-- Success/Error message placeholder -->
-                                            <div id="feedbackMessage" style="display:none;" class="alert" role="alert">
-                                            </div>
-                                            <form id="feedbackForm" action="php/send_feedback.php" method="POST"
-                                                autocomplete="off">
-                                                <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="username"
-                                                        name="username" placeholder="Your Name" required>
-                                                    <label for="username"><i class="bi bi-person-fill me-1"></i>Your
-                                                        Name</label>
-                                                </div>
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="email" name="email"
-                                                        placeholder="you@example.com" required>
-                                                    <label for="email"><i class="bi bi-envelope-fill me-1"></i>Email
-                                                        Address</label>
-                                                </div>
-                                                <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="subject" name="subject"
-                                                        placeholder="Subject" required>
-                                                    <label for="subject"><i
-                                                            class="bi bi-tag-fill me-1"></i>Subject</label>
-                                                </div>
-                                                <div class="form-floating mb-4">
-                                                    <textarea class="form-control" id="feedback" name="feedback"
-                                                        placeholder="Write your message here..." style="height: 120px;"
-                                                        required></textarea>
-                                                    <label for="feedback"><i class="bi bi-pencil-fill me-1"></i>Your
-                                                        Feedback</label>
-                                                </div>
-                                                <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm">
-                                                    <i class="bi bi-send-fill me-2"></i>Submit Feedback
-                                                </button>
-                                            </form>
-
-                                            <div id="feedbackSuccess" class="alert alert-success mt-3 text-center"
-                                                style="display: none;">
-                                                ✅ Thank you! Your feedback was submitted successfully.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+<div id="feedback" class="content-section">
+    <section class="container my-5" id="feedback">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-success text-white text-center py-4">
+                        <h2 class="mb-0"><i class="bi bi-chat-dots me-2"></i>We Value Your Feedback</h2>
+                        <p class="mb-0 small">Let us know how we can improve your experience</p>
                     </div>
+                    <div class="card-body p-4">
+                        <!-- Unified Success/Error Message Box -->
+                        <div id="feedbackSuccess" class="alert text-center mt-3" style="display: none;"></div>
+
+                        <form id="feedbackFormElement" action="php/send_feedback.php" method="POST" autocomplete="off">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Your Name" required>
+                                <label for="username"><i class="bi bi-person-fill me-1"></i>Your Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                                <label for="email"><i class="bi bi-envelope-fill me-1"></i>Email Address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                <label for="subject"><i class="bi bi-tag-fill me-1"></i>Subject</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <textarea class="form-control" id="feedback" name="feedback" placeholder="Write your message here..." style="height: 120px;" required></textarea>
+                                <label for="feedback"><i class="bi bi-pencil-fill me-1"></i>Your Feedback</label>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm">
+                                <i class="bi bi-send-fill me-2"></i>Submit Feedback
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 
                     <!--Track history Session-->
                     <div id="history" class="content-section">
@@ -630,7 +615,8 @@ $conn->close();
     </script>
     <script src="js/forum_topic.js"></script>
     <script src="js/load_forum_topics.js"></script>
-    <script src="js/notification.js"></script>
+    <script src="js/feedback.js"></script>
+
 
 </body>
 

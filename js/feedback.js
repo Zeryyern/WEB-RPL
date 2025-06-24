@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (form && submitBtn) {
     form.addEventListener("submit", function (e) {
-      e.preventDefault();
+      e.preventDefault(); // ✅ Stop normal form submission
 
       // Show loading state
       submitBtn.disabled = true;
@@ -16,23 +16,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fetch(form.action, {
         method: "POST",
-        body: formData
+        body: formData,
       })
         .then(response => response.json())
         .then(data => {
           if (data.success) {
+            successBox.textContent = data.message || "✔️ Submitted!";
             successBox.style.display = "block";
             form.reset();
           } else {
-            alert(data.message || "Something went wrong. Please try again.");
+            successBox.textContent = data.message || "❌ Something went wrong.";
+            successBox.style.color = "red";
+            successBox.style.display = "block";
           }
         })
         .catch(error => {
-          console.error("Error:", error);
-          alert("An error occurred. Please try again later.");
+          console.error("Fetch error:", error);
+          successBox.textContent = "❌ Network error. Please try again.";
+          successBox.style.color = "red";
+          successBox.style.display = "block";
         })
         .finally(() => {
-          // Restore button state
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
         });
