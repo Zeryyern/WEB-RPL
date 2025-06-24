@@ -19,6 +19,7 @@ $result = $conn->query($query);
     <meta charset="UTF-8">
     <title>Admin Feedback Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
     body {
         background-color: #f8f9fa;
@@ -87,8 +88,7 @@ $result = $conn->query($query);
                                             <button type="submit" class="btn btn-success btn-sm">Send Reply</button>
                                     </form>
 
-                                    <form method="POST" action="delete_feedback.php"
-                                        onsubmit="return confirm('Are you sure you want to delete this feedback?');">
+                                    <form method="POST" action="delete_feedback.php" class="delete-feedback-form">
                                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                         <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                     </form>
@@ -108,6 +108,25 @@ $result = $conn->query($query);
     </div>
     </div>
 
+    <script>
+    document.querySelectorAll('.delete-feedback-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This feedback will be deleted!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>

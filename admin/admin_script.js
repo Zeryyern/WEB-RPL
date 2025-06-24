@@ -260,3 +260,9 @@ window.deleteBMIRecommendation = function(id) {
     }
   });
 }
+
+// Toggle sidebar
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('active');
+}
+window.toggleSidebar = toggleSidebar;
