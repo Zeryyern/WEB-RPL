@@ -62,7 +62,9 @@ $csrf_token = $_SESSION['csrf_token'];
             <h2 class="fw-bold"><?= htmlspecialchars($topic['title']) ?></h2>
             <p class="text-muted"><?= htmlspecialchars($topic['description']) ?></p>
         </div>
-
+        <a href="../dashboard.php" class="btn btn-outline-secondary mb-4">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
         <!-- Reply Form -->
         <div class="card mb-4 shadow-sm">
             <div class="card-header bg-primary text-white">Add a Reply</div>
