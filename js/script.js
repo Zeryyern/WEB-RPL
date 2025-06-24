@@ -1,3 +1,15 @@
+const scrollingRecipes = document.querySelector('.scrolling-recipes');
+    if (scrollingRecipes) {
+        document.querySelectorAll('.recipe-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                scrollingRecipes.style.animationPlayState = 'paused';
+            });
+            card.addEventListener('mouseleave', () => {
+                scrollingRecipes.style.animationPlayState = 'running';
+            });
+        });
+    }
+
 const buttons = document.querySelectorAll('.btn[data-target]');
     const sections = document.querySelectorAll('#content-area > div');
 

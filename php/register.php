@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $check->get_result();
 
     if ($result->num_rows > 0) {
-        echo "<script>alert('Username or Email already exists.'); window.history.back();</script>";
+        header("Location: ../register.php?error=username");
         exit;
     }
 
@@ -25,9 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $fullname, $username, $email, $password);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Registration successful! You can now login.'); window.location.href = '../login.php';</script>";
+        header("Location: ../register.php?registered=1");
+        exit;
     } else {
-        echo "<script>alert('Error: " . $stmt->error . "'); window.history.back();</script>";
+        header("Location: ../register.php?error=server");
+        exit;
     }
 
     $stmt->close();

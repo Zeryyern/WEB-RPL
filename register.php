@@ -44,6 +44,17 @@
                 <h2 class="mt-2 mb-0">Create Account</h2>
             </div>
             <form action="php/register.php" method="POST" autocomplete="off">
+            <?php if (isset($_GET['error']) && $_GET['error'] === 'username'): ?>
+            <div class="alert alert-danger text-center">Username or Email already exists.</div>
+            <?php elseif (isset($_GET['error']) && $_GET['error'] === 'server'): ?>
+            <div class="alert alert-danger text-center">Server error. Please try again.</div>
+            <?php elseif (isset($_GET['registered'])): ?>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+            Swal.fire('Success!', 'Registration successful! You can now login.', 'success');
+            </script>
+            <?php endif; ?>
+
                 <div class="mb-3 icon-input">
                     <label for="name" class="form-label">Full Name</label>
                     <i class="bi bi-person-fill"></i>
