@@ -1,0 +1,42 @@
+body {
+      min-height: 100vh;
+      display: flex;
+      background: #f8f9fa;
+    }
+    #sidebar {
+      min-width: 250px;
+      background: #2c3e50;
+      color: white;
+      padding-top: 20px;
+      height: 100vh;
+      position: fixed;
+    }
+    #sidebar .nav-link {
+      color: #bdc3c7;
+      font-weight: 500;
+    }
+    #sidebar .nav-link.active,
+    #sidebar .nav-link:hover {
+      background: #34495e;
+      color: #1abc9c;
+      border-radius: 4px;
+    }
+    #main-content {
+      margin-left: 250px;
+      padding: 20px;
+      flex: 1;
+    }
+    .form-label {
+      font-weight: 600;
+    }
+    .table-actions button {
+      margin-right: 5px;
+    }
+    .img-preview {
+      max-width: 120px;
+      max-height: 90px;
+      margin-top: 8px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }

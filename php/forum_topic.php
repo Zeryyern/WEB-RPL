@@ -21,7 +21,12 @@ if (!$topic) {
 }
 
 // Fetch replies using prepared statement
-$stmt = $conn->prepare("SELECT * FROM forum_replies WHERE topic_id = ? ORDER BY created_at DESC");
+$stmt = $conn->prepare("SELECT r.*, u.username 
+                        FROM forum_replies r
+                        LEFT JOIN users u ON r.user_id = u.id
+                        WHERE r.topic_id = ? 
+                        ORDER BY r.created_at DESC");
+
 $stmt->bind_param("i", $topic_id);
 $stmt->execute();
 $replies = $stmt->get_result();

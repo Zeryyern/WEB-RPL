@@ -429,8 +429,8 @@ $conn->close();
                             </div>
                         </section>
                     </div>
-
-                    <!-- Feedback Sesssion-->
+                    
+<!-- Feedback Sesssion-->
 <div id="feedback" class="content-section">
     <section class="container my-5" id="feedback">
         <div class="row justify-content-center">
