@@ -2,7 +2,7 @@
 session_start();
 include 'config.php'; 
 
-header('Content-Type: application/json'); // JSON response
+header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(405);
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $user_id = null;
 
-// Check if guest
+// Handle guest user
 if (!empty($_POST['username']) && !empty($_POST['email'])) {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
@@ -24,7 +24,6 @@ if (!empty($_POST['username']) && !empty($_POST['email'])) {
     $stmt->fetch();
     $stmt->close();
 
-    // Create guest if not found
     if (!$user_id) {
         $stmt = $conn->prepare("INSERT INTO users (username, email) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $email);
@@ -53,9 +52,9 @@ if (empty($subject) || empty($feedback)) {
     exit;
 }
 
-// Insert feedback
-$stmt = $conn->prepare("INSERT INTO feedbacks (user_id, feedback) VALUES (?, ?)");
-$stmt->bind_param("is", $user_id, $feedback);
+// ✅ Insert subject + feedback
+$stmt = $conn->prepare("INSERT INTO feedbacks (user_id, subject, feedback) VALUES (?, ?, ?)");
+$stmt->bind_param("iss", $user_id, $subject, $feedback);
 if ($stmt->execute()) {
     echo json_encode(["success" => true, "message" => "Feedback submitted successfully."]);
 } else {
