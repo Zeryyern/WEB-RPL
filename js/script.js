@@ -1,15 +1,3 @@
-// const scrollingRecipes = document.querySelector('.scrolling-recipes');
-//     if (scrollingRecipes) {
-//         document.querySelectorAll('.recipe-card').forEach(card => {
-//             card.addEventListener('mouseenter', () => {
-//                 scrollingRecipes.style.animationPlayState = 'paused';
-//             });
-//             card.addEventListener('mouseleave', () => {
-//                 scrollingRecipes.style.animationPlayState = 'running';
-//             });
-//         });
-//     }
-
 const buttons = document.querySelectorAll('.btn[data-target]');
     const sections = document.querySelectorAll('#content-area > div');
 
@@ -108,26 +96,26 @@ function calculateBMI() {
   let status, food, exercise, catalogue;
 
   if (bmi < 18.5) {
-    status = 'Underweight';
-    food = 'High-protein foods like eggs, nuts, dairy';
-    exercise = 'Light strength training, yoga';
-    catalogue = '<ul><li>Peanut Butter Smoothie</li><li>Cheese Omelette</li><li>Whole Milk Yogurt</li></ul>';
-  } else if (bmi < 25) {
-    status = 'Normal weight';
-    food = 'Balanced diet with fruits, grains, proteins';
-    exercise = 'Regular cardio and moderate strength training';
-    catalogue = '<ul><li>Grilled Chicken Bowl</li><li>Quinoa Salad</li><li>Fruit Platter</li></ul>';
-  } else if (bmi < 30) {
-    status = 'Overweight';
-    food = 'Low-carb meals with lean proteins';
-    exercise = 'Cardio, jogging, interval training';
-    catalogue = '<ul><li>Grilled Fish with Veggies</li><li>Keto Chicken Wrap</li><li>Green Smoothie</li></ul>';
-  } else {
-    status = 'Obese';
-    food = 'Low-fat, high-fiber meals';
-    exercise = 'Walking, swimming, light aerobics';
-    catalogue = '<ul><li>Steamed Broccoli & Brown Rice</li><li>Vegetable Soup</li><li>Tofu Stir Fry</li></ul>';
-  }
+  status = 'Underweight';
+  food = 'Focus on high-calorie, protein-rich foods like avocado, banana, oats, and yogurt.';
+  exercise = 'Light strength training such as push-ups, bent-over rows, and planks to build muscle mass.';
+  catalogue = '<ul><li>Avocado Toast</li><li>Banana Oatmeal</li><li>Smoothie Bowl</li></ul>';
+} else if (bmi < 25) {
+  status = 'Normal';
+  food = 'Maintain a balanced diet with lean proteins, vegetables, and fresh fruits.';
+  exercise = 'Combine light cardio with strength exercises like high knees and crunches.';
+  catalogue = '<ul><li>Grilled Chicken</li><li>Fruit Salad</li><li>Boiled Eggs</li></ul>';
+} else if (bmi < 30) {
+  status = 'Overweight';
+  food = 'Choose low-calorie, high-fiber meals such as steamed vegetables and tofu.';
+  exercise = 'Do gentle cardio and core exercises like running in place and crunches.';
+  catalogue = '<ul><li>Steamed Veggies</li><li>Tofu Salad</li><li>Oat Porridge</li></ul>';
+} else {
+  status = 'Obese';
+  food = 'Prioritize low-fat, fiber-rich foods like zucchini soup and cucumber salad.';
+  exercise = 'Start with light movements such as leg swings, modified running in place, and knee & elbow press-ups.';
+  catalogue = '<ul><li>Zucchini Soup</li><li>Grilled Tofu</li><li>Cucumber Salad</li></ul>';
+}
 
   const result = `Your BMI is ${bmi} (${status})`;
 

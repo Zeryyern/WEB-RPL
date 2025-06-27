@@ -12,21 +12,22 @@ $user_id = $_SESSION['user_id'];
 
 $sql = "
 SELECT
-bh.height,
-bh.weight,
-bh.bmi,
-bh.status,
-bh.created_at,
-SUBSTRING_INDEX(SUBSTRING_INDEX(r.content, '|', 1), ':', -1) AS food,
-SUBSTRING_INDEX(r.content, ':', -1) AS exercise
+    bh.height,
+    bh.weight,
+    bh.bmi,
+    bh.status,
+    bh.created_at,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(r.content, '|', 1), ':', -1) AS food,
+    SUBSTRING_INDEX(r.content, ':', -1) AS exercise
 FROM
-bmi_history bh
+    bmi_history bh
 LEFT JOIN
-recommendations r ON bh.user_id = r.user_id AND r.type = 'BMI Recommendation'
+    recommendations r ON r.bmi_history_id = bh.id
 WHERE
-bh.user_id = ?
+    bh.user_id = ?
 ORDER BY
-bh.created_at DESC
+    bh.created_at DESC
+
 ";
 
 $stmt = $conn->prepare($sql);

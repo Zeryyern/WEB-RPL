@@ -53,7 +53,7 @@
     <section id="manageBMI" class="admin-section">
       <h2 class="mb-4">Manage BMI Food & Exercise Recommendations</h2>
 
-      <form id="bmiForm" class="mb-5" action="save_bmi_admin.php" method="POST" enctype="multipart/form-data">
+      <form id="bmiForm" class="mb-5" action="../php/manage_bmi.php" method="POST" enctype="multipart/form-data">
         <div class="row g-3">
           <div class="col-md-4">
             <label for="bmiCategory" class="form-label">BMI Category</label>
@@ -73,7 +73,28 @@
 
           <div class="col-md-4">
             <label for="calory" class="form-label">Calory</label>
-            <input type="text" class="form-control" id="calory" name="calory" placeholder="Enter calory" required />
+            <select class="form-select" id="calory" name="calory" required>
+              <optgroup label="🥑 Underweight">
+                <option value="320">320 kcal</option>
+                <option value="290">290 kcal</option>
+                <option value="270">270 kcal</option>
+              </optgroup>
+              <optgroup label="🍗 Normal">
+                <option value="300">300 kcal</option>
+                <option value="220">220 kcal</option>
+                <option value="150">150 kcal</option>
+              </optgroup>
+              <optgroup label="🥗 Overweight">
+                <option value="160">160 kcal</option>
+                <option value="200">200 kcal</option>
+                <option value="180">180 kcal</option>
+              </optgroup>
+              <optgroup label="🥒 Obese">
+                <option value="140">140 kcal</option>
+                <option value="180">180 kcal</option>
+                <option value="120">120 kcal</option>
+              </optgroup>
+            </select>
           </div> 
           
           <div class="col-md-4">
@@ -104,6 +125,7 @@
             <th>#</th>
             <th>BMI Category</th>
             <th>Food Name</th>
+            <th>Calory</th>
             <th>Image</th>
             <th>Ingredient | Instruction | Recommendation</th>
             <th>Actions</th>

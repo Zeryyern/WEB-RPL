@@ -407,16 +407,17 @@ $conn->close();
                                             </div>
                                         <?php endif; ?>
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= htmlspecialchars($rec['food']) ?></h5>
+                                            <h5 class="card-title mb-1"><?= htmlspecialchars($rec['food']) ?></h5>
+                                            <div class="text-muted mb-2" style="font-size: 1em;">
+                                                <?= htmlspecialchars($rec['calory']) ?> kcal
+                                            </div>
                                             <button class="btn btn-outline-success w-100 mt-2"
                                                 onclick="toggleDetails(this)">
                                                 View Details
                                             </button>
                                             <div class="food-details mt-3">
                                                 <?php if (!empty($rec['exercise'])): ?>
-                                                    <p>Exercise Recommendation:
-
-                                                        <?= nl2br(htmlspecialchars($rec['exercise'])) ?></p>
+                                                    <p><?= nl2br(htmlspecialchars($rec['exercise'])) ?></p>
                                                 <?php endif; ?>
                                                 <p class="mb-0 text-muted small">BMI Category:
                                                     <?= htmlspecialchars($rec['category']) ?></p>
