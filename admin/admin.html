@@ -53,11 +53,11 @@
     <section id="manageBMI" class="admin-section">
       <h2 class="mb-4">Manage BMI Food & Exercise Recommendations</h2>
 
-      <form id="bmiForm" class="mb-5">
+      <form id="bmiForm" class="mb-5" action="save_bmi_admin.php" method="POST" enctype="multipart/form-data">
         <div class="row g-3">
           <div class="col-md-4">
             <label for="bmiCategory" class="form-label">BMI Category</label>
-            <select class="form-select" id="bmiCategory" required>
+            <select class="form-select" id="bmiCategory" name="bmiCategory" required>
               <option value="" disabled selected>Select category</option>
               <option value="Underweight">Underweight</option>
               <option value="Normal">Normal weight</option>
@@ -68,18 +68,25 @@
 
           <div class="col-md-4">
             <label for="foodName" class="form-label">Food Name</label>
-            <input type="text" class="form-control" id="foodName" placeholder="Enter food name" required />
+            <input type="text" class="form-control" id="foodName" name="foodName" placeholder="Enter food name" required />
           </div>
 
           <div class="col-md-4">
+            <label for="calory" class="form-label">Calory</label>
+            <input type="text" class="form-control" id="calory" name="calory" placeholder="Enter calory" required />
+          </div> 
+          
+          <div class="col-md-4">
             <label for="foodImage" class="form-label">Food Image</label>
-            <input type="file" class="form-control" id="foodImage" accept="image/*" />
+            <input type="file" class="form-control" id="foodImage" name="foodImage" accept="image/*" />
             <img id="imgPreview" class="img-preview d-none" alt="Food preview" />
           </div>
 
+    
+
           <div class="col-md-12">
-            <label for="exercise" class="form-label">Exercise Recommendation</label>
-            <textarea class="form-control" id="exercise" rows="3" placeholder="Describe recommended exercises"></textarea>
+            <label for="exercise" class="form-label">Ingredients | Instructions | Recommendation</label>
+            <textarea class="form-control" id="exercise" name="exercise" rows="3" placeholder="Ingredients | Instructions | Recommendation"></textarea>
           </div>
 
           <div class="col-12 text-end">
@@ -98,7 +105,7 @@
             <th>BMI Category</th>
             <th>Food Name</th>
             <th>Image</th>
-            <th>Exercise Recommendation</th>
+            <th>Ingredient | Instruction | Recommendation</th>
             <th>Actions</th>
           </tr>
         </thead>

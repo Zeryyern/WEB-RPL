@@ -187,6 +187,7 @@ function fetchBMIRecommendations() {
             <td>${idx + 1}</td>
             <td>${rec.category}</td>
             <td>${rec.food}</td>
+            <td>${rec.calory} kcal</td>
             <td>${rec.image ? `<img src="../${rec.image}" style="max-width:100px; border-radius:6px;" />` : ''}</td>
             <td>${rec.exercise}</td>
             <td class="table-actions">
@@ -205,12 +206,14 @@ document.getElementById('bmiForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const category = document.getElementById('bmiCategory').value;
   const food = document.getElementById('foodName').value;
+  const calory = document.getElementById('calory').value;
   const exercise = document.getElementById('exercise').value;
   const imageInput = document.getElementById('foodImage');
   const formData = new FormData();
   formData.append('action', 'add');
   formData.append('category', category);
   formData.append('food', food);
+  formData.append('calory', calory); 
   formData.append('exercise', exercise);
   if (imageInput.files[0]) {
     formData.append('image', imageInput.files[0]);

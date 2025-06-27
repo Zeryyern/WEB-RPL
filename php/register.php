@@ -16,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $check->get_result();
 
     if ($result->num_rows > 0) {
+        $check->close();
+        $conn->close();
         header("Location: ../register.php?error=username");
         exit;
     }
@@ -25,16 +27,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $fullname, $username, $email, $password);
 
     if ($stmt->execute()) {
+        $stmt->close();
+        $check->close();
+        $conn->close();
         header("Location: ../register.php?registered=1");
         exit;
     } else {
+        $stmt->close();
+        $check->close();
+        $conn->close();
         header("Location: ../register.php?error=server");
         exit;
     }
-
-    $stmt->close();
-    $check->close();
-    $conn->close();
 } else {
     header("Location: ../register.php");
     exit();

@@ -23,23 +23,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Correct credentials
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["username"] = $user["username"];
+            $stmt->close();
+            $conn->close();
             header("Location: ../dashboard.php");
             exit();
         } else {
             // Wrong password
             $_SESSION["login_error"] = "Incorrect username/email or password.";
+            $stmt->close();
+            $conn->close();
             header("Location: ../login.php");
             exit();
         }
     } else {
         // User not found
         $_SESSION["login_error"] = "Incorrect username/email or password.";
+        if ($stmt) $stmt->close();
+        $conn->close();
         header("Location: ../login.php");
         exit();
     }
-
-    $stmt->close();
-    $conn->close();
 } else {
     header("Location: ../login.php");
     exit();

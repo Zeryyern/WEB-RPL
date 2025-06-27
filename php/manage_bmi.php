@@ -15,6 +15,7 @@ if ($action === 'list') {
 if ($action === 'add') {
     $category = $_POST['category'] ?? '';
     $food = $_POST['food'] ?? '';
+    $calory = $_POST['calory'] ?? '';
     $exercise = $_POST['exercise'] ?? '';
     $imagePath = '';
 
@@ -23,12 +24,14 @@ if ($action === 'add') {
         $filename = uniqid('bmi_') . '_' . basename($_FILES['image']['name']);
         $targetFile = $uploadDir . $filename;
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
-            $imagePath = 'assets/images/' . $filename; // relative path for frontend
+            $imagePath = 'assets/images/' . $filename;
         }
     }
 
-    $stmt = $conn->prepare("INSERT INTO bmi_recommendations (category, food, exercise, image) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $category, $food, $exercise, $imagePath);
+    $stmt = $conn->prepare("INSERT INTO bmi_recommendations 
+        (category, food, calory, exercise, image)
+        VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $category, $food, $calory, $exercise, $imagePath);
     $stmt->execute();
     $stmt->close();
 
