@@ -1,10 +1,10 @@
 <?php
 session_start();
-echo "Session user_id: " . ($_SESSION['user_id'] ?? 'not set') . "<br>";
 
 include 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
+    header('Content-Type: application/json');
     echo json_encode([]);
     exit;
 }
