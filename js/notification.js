@@ -10,14 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!notifContainer) return;
 
         if (!data.length) {
-          notifContainer.innerHTML = `<div class="px-3 small text-muted">No new notifications.</div>`;
+          notifContainer.innerHTML = `<div class="px-3 small text-muted">No notifications.</div>`;
           return;
         }
 
         notifContainer.innerHTML = "";
         data.forEach(item => {
+          // Use bg-light for read, bg-secondary-subtle (or bg-dark) for unread
+          const bgClass = item.read_by_user == 1 ? "bg-light" : "bg-secondary-subtle";
           notifContainer.innerHTML += `
-            <div class="dropdown-item text-wrap small">
+            <div class="dropdown-item text-wrap small ${bgClass}">
               <strong>Admin replied:</strong><br>
               ${item.response}<br>
               <small class="text-muted">${new Date(item.responded_at).toLocaleString()}</small>
@@ -35,7 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mark as read when dropdown is opened
   if (notifDropdown) {
     notifDropdown.addEventListener("click", () => {
-      fetch("php/mark_notifications_read.php", { method: "POST" });
+      fetch("php/mark_notifications_read.php", { method: "POST" })
+        .then(() => {
+          loadNotifications();
+        });
     });
   }
 });

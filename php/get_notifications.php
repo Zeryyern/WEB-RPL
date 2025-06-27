@@ -1,5 +1,7 @@
 <?php
 session_start();
+echo "Session user_id: " . ($_SESSION['user_id'] ?? 'not set') . "<br>";
+
 include 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -9,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT id, response, responded_at FROM feedbacks WHERE user_id = ? AND response IS NOT NULL AND read_by_user = 0 ORDER BY responded_at DESC");
+$stmt = $conn->prepare("SELECT id, response, responded_at, read_by_user FROM feedbacks WHERE user_id = ? AND response IS NOT NULL ORDER BY responded_at DESC");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();

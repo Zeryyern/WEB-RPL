@@ -289,6 +289,7 @@ include 'php/social_links_fetch.php';
     <section id="testimonials" class="my-5 text-center">
         <h2>From our Customers</h2>
         <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Carousel Indicators -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -302,24 +303,19 @@ include 'php/social_links_fetch.php';
                     <img src="assets/images/fruit_smoothie.jpg" class="rounded-circle mx-auto d-block mb-3"
                         style="width: 150px; height: 150px; object-fit: cover;" alt="Saidah Profile">
                     <h5>Usrotun Saidah</h5>
-                    <p class="text-muted px-3">I no longer have to sniff other dogs for love. I've found the hottest
-                        Corgi on TinDog. Woof.</p>
-                </div>
-                <div class="carousel-item">
+                    <p class="text-muted px-3">YourDietBuddy didn’t just help me lose weight, it helped me gain confidence.</p>
                 </div>
                 <div class="carousel-item">
                     <img src="assets/images/zayn.jpeg" class="rounded-circle mx-auto d-block mb-3"
                         style="width: 150px; height: 150px; object-fit: cover;" alt="Zeryyern Profile">
                     <h5>Zeryyern Awwerl </h5>
-                    <p class="text-muted px-3">TinDog brought my pug and her soulmate together. I'm grateful for this
-                        paw-some app!</p>
+                    <p class="text-muted px-3">No crash diets. Just smart food choices with YourDietBuddy.</p>
                 </div>
                 <div class="carousel-item">
                     <img src="assets/images/salad_tuna.jpg" class="rounded-circle mx-auto d-block mb-3"
                         style="width: 150px; height: 150px; object-fit: cover;" alt="Safira Profile">
                     <h5>Safira Aulia Azzahra </h5>
-                    <p class="text-muted px-3">TinDog brought my pug and her soulmate together. I'm grateful for this
-                        paw-some app!</p>
+                    <p class="text-muted px-3">The food suggestions are delicious, healthy, and fit my goals perfectly!</p>
                 </div>
 
             </div>
@@ -402,7 +398,13 @@ include 'php/social_links_fetch.php';
     <!-- VIDEO CAROUSEL -->
     <section class="container my-5">
         <h2 class="text-center mb-4">Healthy Culinary Videos</h2>
-        <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
+        <div id="videoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="8000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#videoCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#videoCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#videoCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
             <div class="carousel-inner rounded shadow">
                 <div class="carousel-item active">
                     <video class="d-block w-100" autoplay muted playsinline>
