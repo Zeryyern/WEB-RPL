@@ -300,7 +300,7 @@ include 'php/social_links_fetch.php';
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="assets/images/fruit_smoothie.jpg" class="rounded-circle mx-auto d-block mb-3"
+                    <img src="assets/images/saidah.jpg" class="rounded-circle mx-auto d-block mb-3"
                         style="width: 150px; height: 150px; object-fit: cover;" alt="Saidah Profile">
                     <h5>Usrotun Saidah</h5>
                     <p class="text-muted px-3">YourDietBuddy didn’t just help me lose weight, it helped me gain confidence.</p>
@@ -312,7 +312,7 @@ include 'php/social_links_fetch.php';
                     <p class="text-muted px-3">No crash diets. Just smart food choices with YourDietBuddy.</p>
                 </div>
                 <div class="carousel-item">
-                    <img src="assets/images/salad_tuna.jpg" class="rounded-circle mx-auto d-block mb-3"
+                    <img src="assets/images/lia.jpg" class="rounded-circle mx-auto d-block mb-3"
                         style="width: 150px; height: 150px; object-fit: cover;" alt="Safira Profile">
                     <h5>Safira Aulia Azzahra </h5>
                     <p class="text-muted px-3">The food suggestions are delicious, healthy, and fit my goals perfectly!</p>

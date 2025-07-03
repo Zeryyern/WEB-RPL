@@ -1,5 +1,19 @@
+
+function showSection(sectionId) {
+  document.querySelectorAll('.admin-section').forEach(section => {
+    section.classList.add('d-none');
+  });
+  document.getElementById(sectionId).classList.remove('d-none');
+
+  // Tambahkan efek "active" ke sidebar link
+  document.querySelectorAll('#sidebar .nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  document.querySelector(`#sidebar .nav-link[href="#${sectionId}"]`)?.classList.add('active');
+}
+
 function fetchBMIRecommendations() {
-  fetch('./manage_bmi.php', {
+  fetch('../php/manage_bmi.php', {
     method: 'POST',
     body: new URLSearchParams({action: 'list'})
   })
@@ -14,7 +28,7 @@ function fetchBMIRecommendations() {
             <td>${idx + 1}</td>
             <td>${rec.category}</td>
             <td>${rec.food}</td>
-            <td>${rec.calory} kcal</td>
+            <td>Calories: ${rec.calory} kcal</td>
             <td>
               ${rec.image ? `<img src="../${rec.image}" style="max-width:100px; border-radius:6px;" />` : ''}
             </td>
@@ -48,7 +62,7 @@ document.getElementById('bmiForm').addEventListener('submit', function(e) {
     formData.append('image', imageInput.files[0]);
   }
 
-  fetch('./manage_bmi.php', {
+  fetch('../php/manage_bmi.php', {
     method: 'POST',
     body: formData
   })
@@ -75,7 +89,7 @@ window.deleteBMIRecommendation = function(id) {
     cancelButtonText: 'No'
   }).then((result) => {
     if (result.isConfirmed) {
-      fetch('./manage_bmi.php', {
+      fetch('../php/manage_bmi.php', {
         method: 'POST',
         body: new URLSearchParams({action: 'delete', id})
       })

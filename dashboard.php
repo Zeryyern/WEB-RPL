@@ -276,7 +276,7 @@ $conn->close();
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Healthy Salad</h5>
-                                        <p class="card-text">Calories: 150 kcal</p>
+                                        <p class="card-text">150 kcal</p>
                                         <button class="btn btn-outline-success w-100 mt-2"
                                             onclick="toggleDetails(this)">
                                             View Details
@@ -306,7 +306,7 @@ $conn->close();
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Grilled Chicken</h5>
-                                        <p class="card-text">Calories: 220 kcal</p>
+                                        <p class="card-text">220 kcal</p>
                                         <button class="btn btn-outline-success w-100 mt-2"
                                             onclick="toggleDetails(this)">
                                             View Details
@@ -336,7 +336,7 @@ $conn->close();
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Pizza Bread</h5>
-                                        <p class="card-text">Calories: 270 kcal</p>
+                                        <p class="card-text">270 kcal</p>
                                         <button class="btn btn-outline-success w-100 mt-2"
                                             onclick="toggleDetails(this)">
                                             View Details
@@ -366,7 +366,7 @@ $conn->close();
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Orange Juice</h5>
-                                        <p class="card-text">Calories: 110 kcal</p>
+                                        <p class="card-text">110 kcal</p>
                                         <button class="btn btn-outline-success w-100 mt-2"
                                             onclick="toggleDetails(this)">
                                             View Details

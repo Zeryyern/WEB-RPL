@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2025 at 12:04 PM
+-- Generation Time: Jun 27, 2025 at 04:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,16 +56,6 @@ CREATE TABLE `bmi_history` (
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bmi_history`
---
-
-INSERT INTO `bmi_history` (`id`, `user_id`, `height`, `weight`, `bmi`, `status`, `created_at`) VALUES
-(38, 14, 50.00, 20.00, 80.00, 'Obese', '2025-06-23 16:22:02'),
-(39, 14, 80.00, 20.00, 31.20, 'Obese', '2025-06-23 16:22:58'),
-(40, 14, 80.00, 20.00, 31.20, 'Obese', '2025-06-23 16:23:00'),
-(41, 14, 100.00, 20.00, 20.00, 'Normal weight', '2025-06-23 16:23:04');
-
 -- --------------------------------------------------------
 
 --
@@ -78,7 +68,8 @@ CREATE TABLE `bmi_recommendations` (
   `food` varchar(100) NOT NULL,
   `exercise` text NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `calory` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -90,6 +81,7 @@ CREATE TABLE `bmi_recommendations` (
 CREATE TABLE `feedbacks` (
   `id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `feedback` text DEFAULT NULL,
   `response` text DEFAULT NULL,
@@ -107,18 +99,11 @@ CREATE TABLE `feedbacks` (
 CREATE TABLE `forum_replies` (
   `id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `username` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `forum_replies`
---
-
-INSERT INTO `forum_replies` (`id`, `topic_id`, `username`, `content`, `created_at`) VALUES
-(4, 15, 'Usrotun', 'hello', '2025-06-23 14:07:24'),
-(5, 15, 'Awwerl', 'okay seems everything is now working buddy', '2025-06-23 14:11:51');
 
 -- --------------------------------------------------------
 
@@ -144,7 +129,8 @@ CREATE TABLE `recommendations` (
   `user_id` int(11) NOT NULL,
   `type` varchar(50) DEFAULT NULL,
   `content` text DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp(),
+  `bmi_history_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -172,14 +158,6 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `password`) VALUES
-(14, 'Usrotun Saidah', 'Usrotun', 'usrotun@gmail.com', '$2y$10$0E9eVtYGEEL9YlgMSGNJC.R2RRM8jpBVSYWjaKJfEzX/W84pBpYBO'),
-(15, 'Awwal Abdullahi', 'Awwerl', 'awwal@gmail.com', '$2y$10$MnxjQAk01DYOH3n0/OsWjux.lxR/ADc9IDLcgoe1/EEoG3npMh3O.');
 
 -- --------------------------------------------------------
 
@@ -279,49 +257,49 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bmi_history`
 --
 ALTER TABLE `bmi_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `bmi_recommendations`
 --
 ALTER TABLE `bmi_recommendations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `forum_replies`
 --
 ALTER TABLE `forum_replies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `forum_topics`
 --
 ALTER TABLE `forum_topics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `recommendations`
 --
 ALTER TABLE `recommendations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `social_links`
 --
 ALTER TABLE `social_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `user_history`
